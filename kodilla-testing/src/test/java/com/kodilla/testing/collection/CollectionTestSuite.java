@@ -24,11 +24,7 @@ public class CollectionTestSuite {
         OddNumbersExterminator numberList = new OddNumbersExterminator(new ArrayList<>());
         ArrayList<Integer> result = numberList.exterminate(withoutOdd);
 
-        if(result.isEmpty()){
-            System.out.println("Test ok, List is empty.");
-        }else {
-            System.out.println("Error, List is not empty");
-        }
+        Assert.assertEquals(result.size(),0);
     }
     @Test
     public void testOddNumbersExterminatorNormalList(){
@@ -44,10 +40,6 @@ public class CollectionTestSuite {
         OddNumbersExterminator numberList = new OddNumbersExterminator(new ArrayList<>());
         ArrayList<Integer> result = numberList.exterminate(normalList);
 
-        if(result.size() == 3){
-            System.out.println("Test ok, numbers are even.");
-        }else {
-            System.out.println("Error");
-        }
+        Assert.assertEquals(result.size(),3);
     }
 }
