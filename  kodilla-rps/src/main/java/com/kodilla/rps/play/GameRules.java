@@ -9,5 +9,6 @@ public class GameRules {
         else if (a == 2 && b == 3) return b;
         else if (a == 3 && b == 2) return a;
         else return 0;
+
     }
 }

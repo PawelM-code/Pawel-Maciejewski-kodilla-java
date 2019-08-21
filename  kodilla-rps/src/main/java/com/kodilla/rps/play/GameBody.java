@@ -30,57 +30,73 @@ public class GameBody {
         while (!end){
             System.out.println(name + " move: ");
             if(scanner.hasNextInt()){
-                int a = scanner.nextInt();
-                int b = random.nextInt(3)+1;
-                System.out.println("Computer move: " + b);
-                int result = play.gameRules(a,b);
+                int playerOneMove = scanner.nextInt();
+                int playerTwoMove = random.nextInt(3)+1;
 
-                if(result == a){
-                    roundCountPlayerOne++;
-                    System.out.println(name + " won !\n" + name+" "+roundCountPlayerOne+" : "+roundCountPlayerTwo+" Computer");
-                }else if(result == b) {
-                    roundCountPlayerTwo++;
-                    System.out.println("Computer won !\n"+ name+" " +roundCountPlayerOne+" : "+roundCountPlayerTwo+" Computer");
-                }else if (a == b){
-                    System.out.println("Tie.\n"+ name+" " +roundCountPlayerOne+" : "+roundCountPlayerTwo+" Computer");
-                }else {
-                    System.out.println("Invalid number, please select key 1, 2 or 3.");
-                }
+                System.out.println("Computer move: " + playerTwoMove);
+                int result = play.gameRules(playerOneMove,playerTwoMove);
 
-                if(numberOfWonRounds == roundCountPlayerOne || numberOfWonRounds == roundCountPlayerTwo){
-                    if(roundCountPlayerOne>roundCountPlayerTwo){
-                        System.out.println(name + " WON Congratulations!\nEnd the game \"x\" or keep playing \"n\"");
-                    }else {
-                        System.out.println("Computer WON Congratulations!\nEnd the game \"x\" or keep playing \"n\"");
-                    }
-                    String xOrNPattern = "xn";
-                    String xOrN = scanner.next();
+                roundResultsMessages(name, playerOneMove, playerTwoMove, result);
 
-                    while (!xOrNPattern.contains(xOrN)){
-                        System.out.println("Invalid character, please select again.");
-                        xOrN = scanner.next();
-                    }
-
-                    if (xOrN.equals("x")) {
-                        end = true;
-                    }else numberOfWonRounds = initNumberOfWonRounds();
-                }
+                numberOfWonRounds = endOfTheGame(name, numberOfWonRounds);
             }else {
                 String input = scanner.nextLine();
-                if(input.equals("x")){
-                    System.out.println("Are you sure you want to end the game? || Enter \"yes\" or \"no\"");
-                    String yesOrNo = scanner.nextLine();
-                    if (yesOrNo.equals("yes")) {
-                        end = true;
-                    }
-                } else if(input.equals("n")){
-                    System.out.println("Are you sure you want to end the current game? || Enter \"yes\" or \"no\"");
-                    String yesOrNo = scanner.nextLine();
-                    if (yesOrNo.equals("yes")) numberOfWonRounds = initNumberOfWonRounds();
-                }
+                numberOfWonRounds = confirmationEndOfTheGameOrEndOfTheCurrentGame(numberOfWonRounds, input);
             }
     }
 }
+
+    private int confirmationEndOfTheGameOrEndOfTheCurrentGame(int numberOfWonRounds, String input) {
+        if(input.equals("x")){
+            System.out.println("Are you sure you want to end the game? || Enter \"yes\" or \"no\"");
+            String yesOrNo = scanner.nextLine();
+            if (yesOrNo.equals("yes")) {
+                end = true;
+            }
+        } else if(input.equals("n")){
+            System.out.println("Are you sure you want to end the current game? || Enter \"yes\" or \"no\"");
+            String yesOrNo = scanner.nextLine();
+            if (yesOrNo.equals("yes")) numberOfWonRounds = initNumberOfWonRounds();
+        }
+        return numberOfWonRounds;
+    }
+
+    private void roundResultsMessages(String name, int playerOneMove, int playerTwoMove, int result) {
+        if(result == playerOneMove){
+            roundCountPlayerOne++;
+            System.out.println(name + " won !\n" + name+" "+roundCountPlayerOne+" : "+roundCountPlayerTwo+" Computer");
+        }else if(result == playerTwoMove) {
+            roundCountPlayerTwo++;
+            System.out.println("Computer won !\n"+ name+" " +roundCountPlayerOne+" : "+roundCountPlayerTwo+" Computer");
+        }else if (playerOneMove == playerTwoMove){
+            System.out.println("Tie.\n"+ name+" " +roundCountPlayerOne+" : "+roundCountPlayerTwo+" Computer");
+        }else {
+            System.out.println("Invalid number, please select key 1, 2 or 3.");
+        }
+    }
+
+    private int endOfTheGame(String name, int numberOfWonRounds) {
+        if(numberOfWonRounds == roundCountPlayerOne || numberOfWonRounds == roundCountPlayerTwo){
+            if(roundCountPlayerOne>roundCountPlayerTwo){
+                System.out.println(name + " WON Congratulations!\nEnd the game \"x\" or keep playing \"n\"");
+            }else {
+                System.out.println("Computer WON Congratulations!\nEnd the game \"x\" or keep playing \"n\"");
+            }
+            String xOrNPattern = "xn";
+            String xOrN = scanner.next();
+
+            while (!xOrNPattern.contains(xOrN)){
+                System.out.println("Invalid character, please select again.");
+                xOrN = scanner.next();
+            }
+
+            if (xOrN.equals("x")) {
+                end = true;
+            }else numberOfWonRounds = initNumberOfWonRounds();
+        }
+        return numberOfWonRounds;
+    }
+
     private int initNumberOfWonRounds() {
         int numberOfWonRounds;
         System.out.println("Enter the number of rounds won: ");
