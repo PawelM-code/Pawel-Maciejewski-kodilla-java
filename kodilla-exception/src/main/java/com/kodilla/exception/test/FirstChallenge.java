@@ -3,14 +3,10 @@ package com.kodilla.exception.test;
 public class FirstChallenge {
 
     public double divide(double a, double b) throws ArithmeticException {
-        try {
-            if(b == 0) throw new ArithmeticException();
-        }catch (ArithmeticException e){
-            System.out.println("Exception: " + e);
-        }finally {
-            System.out.println("End try-catch-finally");
+        if(b == 0){
+            throw new ArithmeticException();
         }
-        return a/b;
+        return a / b;
     }
 
     /**
@@ -20,10 +16,18 @@ public class FirstChallenge {
     public static void main(String[] args) {
 
         FirstChallenge firstChallenge = new FirstChallenge();
+        double result = 0;
+        int count = 0;
 
-        double result = firstChallenge.divide(3, 1);
+        try{
+            result = firstChallenge.divide(3, 0);
+        }catch (ArithmeticException e){
+            System.out.println("Exception: " + e);
+            count++;
+        }finally {
+            System.out.println("Finally test");
+        }
 
-        if(!Double.isInfinite(result)) System.out.println(result);
-
+        if(count != 1) System.out.println(result);
     }
 }
