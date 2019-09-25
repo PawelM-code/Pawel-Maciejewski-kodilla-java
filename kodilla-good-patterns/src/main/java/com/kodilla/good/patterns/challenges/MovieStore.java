@@ -1,10 +1,9 @@
 package com.kodilla.good.patterns.challenges;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.security.cert.CollectionCertStoreParameters;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MovieStore {
 
@@ -33,12 +32,10 @@ public class MovieStore {
     public static void main(String[] args) {
         MovieStore movieStore = new MovieStore();
 
-//        movieStore.getMovies()
-//                    .forEach((key, value) -> value
-//                          .forEach(s -> System.out.print(s.concat("!"))));
-        movieStore.getMovies()
-                .forEach((key, value) -> System.out.print(value
-                        .stream()
-                        .collect(Collectors.joining("!"))));
+        final String result = movieStore.getMovies().entrySet()
+                .stream()
+                .flatMap(e -> e.getValue().stream())
+                .collect(Collectors.joining("!"));
+        System.out.println(result);
     }
 }
