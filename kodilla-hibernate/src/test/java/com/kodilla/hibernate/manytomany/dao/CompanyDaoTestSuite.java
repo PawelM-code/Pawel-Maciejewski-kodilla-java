@@ -144,7 +144,7 @@ public class CompanyDaoTestSuite {
 
         //When
 
-        List<Company> companies = companyDao.retrieveCompanyNameAfterThreeChars("Sof%");
+        List<Company> companies = companyDao.retrieveCompanyNameAfterThreeChars("Sof");
 
         //Then
         Assert.assertEquals(2, companies.size());

@@ -7,7 +7,7 @@ import java.util.List;
 
 @NamedQuery(
         name = "Company.retrieveCompanyNameAfterThreeChars",
-        query = "FROM Company WHERE companyName LIKE :COMPANY_NAME"
+        query = "FROM Company WHERE SUBSTR(companyName, 1, 3) = :COMPANY_NAME"
 )
 @Entity
 @Table(name = "COMPANIES")
