@@ -9,6 +9,10 @@ import java.util.List;
         name = "Company.retrieveCompanyNameAfterThreeChars",
         query = "FROM Company WHERE SUBSTR(companyName, 1, 3) = :COMPANY_NAME"
 )
+@NamedQuery(
+        name = "Company.retrieveCompanyNameAfterPartOfName",
+        query = "FROM Company WHERE COMPANY_NAME LIKE CONCAT('%',:COMPANY_NAME,'%')"
+)
 @Entity
 @Table(name = "COMPANIES")
 public class Company {
@@ -22,6 +26,7 @@ public class Company {
     public Company(String companyName) {
         this.companyName = companyName;
     }
+
     @Id
     @NotNull
     @GeneratedValue

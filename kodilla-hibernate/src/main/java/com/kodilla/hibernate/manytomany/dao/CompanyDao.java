@@ -14,4 +14,7 @@ import java.util.List;
 public interface CompanyDao extends CrudRepository<Company, Integer> {
     @Query
     List<Company> retrieveCompanyNameAfterThreeChars(@Param("COMPANY_NAME") String companyName);
+
+    @Query
+    List<Company> retrieveCompanyNameAfterPartOfName(@Param("COMPANY_NAME") String companyName);
 }
