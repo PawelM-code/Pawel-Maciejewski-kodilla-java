@@ -15,7 +15,7 @@ Clone this repo to your local machine using [https://github.com/PawelM-code/Pawe
 * Stream
 * MySQL
 * SL4JF
-* Stream
+* Selenium
 
 ## Additional tasks
 * [Sudoku solver](https://github.com/PawelM-code/Pawel-Maciejewski-kodilla-java/tree/master/kodilla-sudoku)
